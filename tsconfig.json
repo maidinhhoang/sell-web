@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "NodeNext", // Specifies the output module to be used
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "outDir": "dist", //  Output path for build folder
+    "baseUrl": ".", // Base path for imports
+    "paths": {
+      "~/*": ["src/*"] // Relative paths for imports (alias)
+    }
+  },
+
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
+  "include": ["src"] // Include paths for files to build
+}

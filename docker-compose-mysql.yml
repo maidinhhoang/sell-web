@@ -1,0 +1,10 @@
+services:
+  mysql-web-sell:
+    image: mysql:8.3.0
+    container_name: mysql-web-sell
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpassword
+      - MYSQL_DATABASE=mysql-web-sell
+    ports:
+      - '3307:3306'
+    restart: always

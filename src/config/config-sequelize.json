@@ -1,0 +1,11 @@
+{
+  "development": {
+    "username": "root",
+    "password": "rootpassword",
+    "database": "mysql-web-sell",
+    "host": "localhost",
+    "dialect": "mysql",
+    "port": 3307,
+    "logging": false
+  }
+}
