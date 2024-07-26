@@ -1,4 +1,4 @@
-import { CountOptions, FindOptions, Model, ModelCtor, Op } from 'sequelize';
+import { CountOptions, FindOptions, Model, ModelCtor, Op, Transaction } from 'sequelize';
 
 export const BaseRepository = (model: ModelCtor<Model>) => {
   const getAll = (options: FindOptions): Promise<any[]> => {
@@ -9,8 +9,8 @@ export const BaseRepository = (model: ModelCtor<Model>) => {
     return model.count(options);
   };
 
-  const create = (body: any): Promise<any> => {
-    return model.create(body);
+  const create = (body: any, transaction?: Transaction): Promise<any> => {
+    return model.create(body, { transaction });
   };
 
   return {
