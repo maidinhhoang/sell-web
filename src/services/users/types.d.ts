@@ -6,4 +6,4 @@ export type TSearchAllUsersParams = any;
 
 export type TUserCreateRequest = TUserUpdateBody & { password: string };
 
-export type TUserUpdateBody = { fullName: string; username: string };
+export type TUserUpdateBody = { email: string; fullName: string; username: string };

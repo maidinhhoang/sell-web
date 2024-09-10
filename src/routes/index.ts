@@ -1,11 +1,12 @@
 import express, { Express } from 'express';
-import { registerUser } from '~/controllers/register-user.controller';
+import authRoutes from './auth-routes';
+import usersRoutes from './users-routes';
 
 const router = express.Router();
 
 const initRoutes = (app: Express) => {
-  router.post('/register', registerUser);
-
+  authRoutes(router);
+  usersRoutes(router);
   return app.use('/api', router);
 };
 

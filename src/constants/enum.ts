@@ -13,7 +13,8 @@ export enum EErrorCode {
   SUCCESS = 0,
   BAD_REQUEST = 1,
   SERVER_ERROR = 2,
-  NOT_FOUND = 3
+  NOT_FOUND = 3,
+  UNAUTHORIZED = 4
 }
 
 export enum ECodeUserTypes {

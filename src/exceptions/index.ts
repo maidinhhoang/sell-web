@@ -21,6 +21,12 @@ export const exceptionApiResponse = ({ httpStatus, data, errorCode, message }: T
         errorCode: errorCode || EErrorCode.SERVER_ERROR,
         message: message || 'Internal server error'
       };
+    case EHttpStatus.UNAUTHORIZED:
+      return {
+        httpStatus,
+        errorCode: errorCode || EErrorCode.UNAUTHORIZED,
+        message: message || 'Unauthorized'
+      };
 
     default:
       return {

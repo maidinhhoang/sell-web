@@ -1,8 +1,8 @@
 import bcrypt from 'bcryptjs';
+import { Transaction } from 'sequelize';
 
 import UserRepository from '~/repository/users.repo';
 import { TUserCreateRequest, TUsersAttributes } from './types';
-import { Transaction } from 'sequelize';
 
 const saltPassword = bcrypt.genSaltSync();
 
@@ -22,14 +22,35 @@ export const countUsers = (userName: string) => {
   });
 };
 
-export const createUserService = (body: TUserCreateRequest, trans?: Transaction) => {
+export const createUserService = (body: TUserCreateRequest, trans?: Transaction): Promise<TUsersAttributes> => {
   return new Promise<TUsersAttributes>(async (resolve, reject) => {
     try {
       const newBody: TUserCreateRequest = { ...body, password: hashPasswordUser(body.password) };
       const user = await UserRepository.create(newBody, trans);
-      const newUser = user.get({ plain: true });
-      delete newUser.password;
-      resolve(newUser);
+      delete user.password;
+      resolve(user);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const getUserService = (userName: string): Promise<TUsersAttributes> => {
+  return new Promise<TUsersAttributes>(async (resolve, reject) => {
+    try {
+      const user = await UserRepository.findOne({ where: { userName } });
+      resolve(user);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
+export const getUserById = (id: string): Promise<TUsersAttributes> => {
+  return new Promise<TUsersAttributes>(async (resolve, reject) => {
+    try {
+      const user = await UserRepository.findOne({ where: { id } });
+      resolve(user);
     } catch (error) {
       reject(error);
     }

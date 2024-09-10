@@ -1,6 +1,7 @@
 require('dotenv').config();
 import express from 'express';
 import bodyParser from 'body-parser';
+import createError from 'http-errors';
 
 import configViewEngine from './config/viewEngine';
 import initRoutes from './routes';
@@ -13,6 +14,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 configViewEngine(app);
 initRoutes(app);
+
+app.use((_req, _res, next) => {
+  next(createError(404));
+});
 
 connectDB();
 

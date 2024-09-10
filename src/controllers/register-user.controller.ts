@@ -12,7 +12,7 @@ export const registerUser = async (req: Request, res: Response) => {
   const body = req.body;
   let response: TResponseApi;
 
-  const fieldRequired = ['address', 'fullName', 'password', 'phoneNumber', 'userName', 'userType'];
+  const fieldRequired = ['address', 'fullName', 'password', 'phoneNumber', 'userName', 'userType', 'email'];
   const trans = await sequelize.transaction();
 
   try {
@@ -22,11 +22,12 @@ export const registerUser = async (req: Request, res: Response) => {
       body.password &&
       body.phoneNumber &&
       body.userName &&
+      body.email &&
       (body.userType === ECodeUserTypes.GUEST || body.userType === ECodeUserTypes.GUEST)
     ) {
       const userCount = await countUsers(body.userName);
       if (!userCount) {
-        const bodyUser = { fullName: body.fullName, username: body.userName, password: body.password };
+        const bodyUser = { fullName: body.fullName, username: body.userName, password: body.password, email: body.email };
         const user = await createUserService(bodyUser, trans);
 
         const bodyUserDetail = {
